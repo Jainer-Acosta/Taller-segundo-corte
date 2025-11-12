@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Registro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="registro" (ngSubmit)="onSubmit()">
+
+    <ion-item>
+      <ion-label position="floating">Correo electrónico</ion-label>
+      <ion-input type="email" formControlName="email"></ion-input>
+    </ion-item>
+    <ion-note color="danger" *ngIf="registro.get('email')?.invalid && registro.get('email')?.touched">
+      Ingresa un correo válido.
+    </ion-note>
+
+    <ion-item>
+      <ion-label position="floating">Contraseña</ion-label>
+      
+      <ion-input [type]="passwordType" formControlName="password"></ion-input>
+
+      <ion-button fill="clear" slot="end" type="button" (click)="togglePasswordVisibility()">
+          <img [src]="passwordType === 'password' ? 'assets/icon/ojo_cerrado.png' : 'assets/icon/ojo_abierto.png'" width="24" />
+      </ion-button>
+
+
+    </ion-item>
+    <ion-note color="danger" *ngIf="registro.get('password')?.invalid && registro.get('password')?.touched">
+      La contraseña debe tener al menos 6 caracteres, una mayúscula, una minúscula, un número y un símbolo.
+    </ion-note>
+
+    <ion-item>
+      <ion-label position="floating">Confirmar contraseña</ion-label>
+      <ion-input [type]="passwordType" formControlName="confirmPassword"></ion-input>
+
+      <ion-button fill="clear" slot="end" type="button" (click)="togglePasswordVisibility()">
+          <img [src]="passwordType === 'password' ? 'assets/icon/ojo_cerrado.png' : 'assets/icon/ojo_abierto.png'" width="24" />
+      </ion-button>
+
+    </ion-item>
+    <ion-note color="danger" *ngIf="registro.get('confirmPassword')?.invalid && registro.get('confirmPassword')?.touched">
+      Debes confirmar la contraseña.
+    </ion-note>
+
+    <ion-button expand="block" type="submit" color="primary" [disabled]="registro.invalid">
+      Registrarse
+    </ion-button>
+
+    <ion-button expand="block" color="medium" routerLink="/inicio-sesion">
+      ¿Ya tienes cuenta? Inicia sesión
+    </ion-button>
+
+  </form>
+</ion-content>

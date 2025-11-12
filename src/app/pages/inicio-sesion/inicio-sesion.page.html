@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Inicio de Sesión</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <form [formGroup]="inicioSesion" (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label position="floating">Correo electrónico</ion-label>
+      <ion-input type="email" formControlName="email"></ion-input>
+    </ion-item>
+    
+    <ion-note color="danger" *ngIf="inicioSesion.get('email')?.invalid && inicioSesion.get('email')?.touched">
+      Ingresa un correo válido.
+    </ion-note>
+
+      <ion-item>
+        <ion-label position="floating">Contraseña</ion-label>
+        <ion-input [type]="passwordType" formControlName="password"></ion-input>
+      
+        <ion-button fill="clear" slot="end" type="button" (click)="togglePasswordVisibility()">
+          <img [src]="passwordType === 'password' ? 'assets/icon/ojo_cerrado.png' : 'assets/icon/ojo_abierto.png'" width="24" />
+        </ion-button>
+
+      </ion-item>
+    
+    <ion-note color="danger" *ngIf="inicioSesion.get('password')?.invalid && inicioSesion.get('password')?.touched">
+      La contraseña es obligatoria
+    </ion-note>
+
+   <ion-button expand="block" type="submit" color="primary" [disabled]="inicioSesion.invalid">
+        Iniciar Sesión
+    </ion-button>
+
+
+    <ion-button expand="block" color="medium" routerLink="/registro">
+      ¿No tienes cuenta? Regístrate
+    </ion-button>
+  </form>
+
+  
+
+</ion-content>
